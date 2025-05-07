@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-2">
             <BarChart3 className="h-6 w-6" />
-            <span className="font-bold text-xl">ExpenseTracker</span>
+            <span className="font-bold text-xl">Nome da Empresa</span>
           </div>
           
           <div className="flex-1 mx-10">
