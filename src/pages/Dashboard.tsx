@@ -4,6 +4,7 @@ import CategoryBreakdown from '../components/Dashboard/CategoryBreakdown';
 import MonthlyComparison from '../components/Dashboard/MonthlyComparison';
 import ExpenseList from '../components/Dashboard/ExpenseList';
 import MonthlyTrend from '../components/Dashboard/MonthlyTrend';
+import ExpenseManager from '../components/Dashboard/ExpenseManager';
 
 const Dashboard: React.FC = () => {
   return (
@@ -19,6 +20,8 @@ const Dashboard: React.FC = () => {
         <CategoryBreakdown />
         <MonthlyComparison />
       </div>
+
+      <ExpenseManager></ExpenseManager>
       
       <ExpenseList />
     </div>
