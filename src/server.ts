@@ -1,14 +1,11 @@
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import expensesRoutes from "./routes/expenses";
-
-dotenv.config();
+import expensesRouter from "./routes/expenses";
 
 const app = express();
-app.use(cors());
+
 app.use(express.json());
+app.use("/expenses", expensesRouter);
 
-app.use("/api/expenses", expensesRoutes);
-
-app.listen(3001, () => console.log("API rodando em http://localhost:3001"));
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
