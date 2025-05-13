@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
               className="flex items-center space-x-1 bg-emerald-600 hover:bg-emerald-700 px-3 py-2 rounded-lg transition-colors duration-200"
             >
               <PlusCircle className="h-4 w-4" />
-              <span className="hidden md:inline">Add Expense</span>
+              <span className="hidden md:inline">Adicionar despesa</span>
             </button>
             <button className="p-2 hover:bg-indigo-800 rounded-full transition-colors duration-200">
               <Settings className="h-5 w-5" />
