@@ -28,7 +28,7 @@ const criaDespesa = (description, amount) => {
 }
 
 const removeDespesa = (id) => {
-  return fetch(`http://localhost:3000/profile/${id}`, {
+  return fetch(`http://localhost:3000/expense/${id}`, {
     method: 'DELETE'
   }).then(resposta => {
     if (!resposta.ok) {
@@ -38,7 +38,7 @@ const removeDespesa = (id) => {
 }
 
 const detalhaDespesa = (id) => {
-  return fetch(`http://localhost:3000/profile/${id}`)
+  return fetch(`http://localhost:3000/expense/${id}`)
     .then(resposta => {
       if (resposta.ok) {
         return resposta.json()
@@ -48,7 +48,7 @@ const detalhaDespesa = (id) => {
 }
 
 const atualiaDespesa = (id, description, amount) => {
-  return fetch(`http://localhost:3000/profile/${id}`, {
+  return fetch(`http://localhost:3000/expense/${id}`, {
     method: 'PUT',
     headers: {
       'Content-type': 'application/json'

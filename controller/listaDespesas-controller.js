@@ -1,10 +1,10 @@
 import { expenseService } from "../service/expense-service.js";
 
-const criarNovalinha = (descricao, valor, id) => {
+const criarNovalinha = (description, amount, id) => {
     const linhaNovaDespesa = document.createElement('tr')
     const conteudo = `
-    <td class="td" data-td>${descricao}</td>
-    <td>${valor}</td>
+    <td class="td" data-td>${description}</td>
+    <td>${amount}</td>
     <td>
         <ul class="tabela__botoes-controle">
             <li><a href="../telas/edita_despesa.html?id=${id}" class="botao-simples botao-simples--editar">Editar</a></li>
@@ -42,7 +42,7 @@ const render = async () => {
         const listaDespesas = await expenseService.listaDespesas()
 
         listaDespesas.forEach(elemento => {
-            tabela.appendChild(criarNovalinha(elemento.descricao, elemento.valor, elemento.id))
+            tabela.appendChild(criarNovalinha(elemento.description, elemento.amount, elemento.id))
         })
     }
     catch (err) {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doguito Petshop | Clientes</title>
+    <title>Niti Despesas| Despesas</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/base/base.css">
@@ -17,13 +17,13 @@
 
 <body>
     <header class="cabecalho container">
-        <img src="../assets/img/doguitoadm.svg" alt="Logotipo Niti" class="cabecalho__logo">
+        <img src="../assets/img/icon-financa.png" alt="Logotipo Niti" class="cabecalho__logo">
         <nav>
             <ul class="cabecalho__lista-navegacao">
                 <li class="cabecalho__link"><a href="#">Dashboard</a></li>
                 <li class="cabecalho__link"><a href="#">Produtos</a></li>
-                <li class="cabecalho__link"><a href="#">Clientes</a></li>
-                <li class="cabecalho__link"><a href="#">Pets</a></li>
+                <li class="cabecalho__link"><a href="#">Despesas</a></li>
+                <li class="cabecalho__link"><a href="#">Outros</a></li>
             </ul>
         </nav>
     </header>
@@ -32,10 +32,10 @@
         <table class="tabela">
             <thead>
                 <tr>
-                    <th class="tabela__coluna--p">Nome</th>
-                    <th class="tabela__coluna--g">Email</th>
-                    <th class="tabela__coluna--m tabela__alinhamento--direita"><a href="./cadastra_cliente.html"
-                            class="botao-simples botao-simples--adicionar">Novo Cliente</a></th>
+                    <th class="tabela__coluna--p">Descrição</th>
+                    <th class="tabela__coluna--g">Valor</th>
+                    <th class="tabela__coluna--m tabela__alinhamento--direita"><a href="./cadastra_despesa.html"
+                            class="botao-simples botao-simples--adicionar">Nova Despesa</a></th>
                 </tr>
             </thead>
             <tbody data-tabela>
@@ -57,6 +57,6 @@
         </div>
     </main>
 </body>
-<script type="module" src="../controller/listaClientes-controller.js"></script>
+<script type="module" src="../controller/listaDespesas-controller.js"></script>
 
 </html>

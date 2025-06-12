@@ -10,8 +10,8 @@ import { expenseService } from "../service/expense-service.js";
 
     try {
         const dados = await expenseService.detalhaDespesa(id)
-        inputDescricao.value = dados.descricao
-        inputValor.value = dados.value
+        inputDescricao.value = dados.description
+        inputValor.value = dados.amount
     }
     catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ import { expenseService } from "../service/expense-service.js";
         evento.preventDefault()
         try {
             await expenseService.atualiaDespesa(id, inputDescricao.value, inputValor.value)
-            window.location.href = '..telas/edicao_concluida.html'
+            window.location.href = '../telas/edicao_concluida.html'
         }
         catch (err) {
             console.log(err);
