@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niti Despesas| Despesas</title>
+    <title>Dashboard de Gastos Mensais</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/base/base.css">
@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../assets/css/componentes/tabela.css">
     <link rel="stylesheet" href="../assets/css/componentes/botao.css">
     <link rel="stylesheet" href="../assets/css/componentes/modal.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <!-- Incluindo Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -27,36 +30,29 @@
             </ul>
         </nav>
     </header>
+    <div class="dashboard">
+        <h1>Dashboard de Gastos Mensais</h1>
 
-    <main class="clientes-container">
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th class="tabela__coluna--p">Descrição</th>
-                    <th class="tabela__coluna--g">Valor</th>
-                    <th class="tabela__coluna--m tabela__alinhamento--direita"><a href="./cadastra_despesa.html"
-                            class="botao-simples botao-simples--adicionar">Nova Despesa</a></th>
-                </tr>
-            </thead>
-            <tbody data-tabela>
-
-            </tbody>
-        </table>
-        <div class="modal-container modal--fechado">
-            <article class="modal">
-                <h2 class="modal__titulo">
-                    Excluir
-                </h2>
-                <button class="modal__fechar">X</button>
-                <p class="modal__texto">Deseja excluir essa entrada?</p>
-                <div class="modal__botao-container">
-                    <button class="modal__botao modal__botao--confirmar">Excluir</button>
-                    <button class="modal__botao">Não excluir</button>
-                </div>
-            </article>
+        <div class="summary">
+            <div class="summary-card">
+                <h3>Total Anual</h3>
+                <p id="total-anual">R$ 0,00</p>
+            </div>
+            <div class="summary-card">
+                <h3>Mês com Maior Gasto</h3>
+                <p id="maior-gasto">-</p>
+            </div>
+            <div class="summary-card">
+                <h3>Média Mensal</h3>
+                <p id="media-mensal">R$ 0,00</p>
+            </div>
         </div>
-    </main>
+
+        <div class="chart-container">
+            <canvas id="gastosChart"></canvas>
+        </div>
+    </div>
 </body>
-<script type="module" src="../controller/listaDespesas-controller.js"></script>
+<script type="module" src="../service/sum-expense.js"></script>
 
 </html>

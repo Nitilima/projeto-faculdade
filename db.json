@@ -1,3 +1,10 @@
 {
-  "expense": []
+  "expense": [
+    {
+      "id": "511a",
+      "description": "Diesel",
+      "amount": "1200",
+      "date": "2025-05-01"
+    }
+  ]
 }

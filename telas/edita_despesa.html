@@ -20,7 +20,7 @@
         <img src="../assets/img/icon-financa.png" alt="Logo Doguito" class="cabecalho__logo">
         <nav>
             <ul class="cabecalho__lista-navegacao">
-                <li class="cabecalho__link"><a href="#">Dashboard</a></li>
+                <li class="cabecalho__link"><a href="./dashboard.html">Dashboard</a></li>
                 <li class="cabecalho__link"><a href="#">Produtos</a></li>
                 <li class="cabecalho__link"><a href="lista_despesa.html">Despesas </a></li>
                 <li class="cabecalho__link"><a href="#">Outros</a></li>
@@ -40,6 +40,11 @@
                 <div class="input-container">
                     <input name="valor" id="valor" class="input" type="text" placeholder="valor" required data-valor>
                     <label class="input-label" for="valor">Valor</label>
+                    <span class="input-mensagem-erro">Esse campo não pode ficar vazio</span>
+                </div>
+                <div class="input-container">
+                    <input name="data" id="data" class="input" type="text" placeholder="data" required data-date>
+                    <label class="input-label" for="data">Data</label>
                     <span class="input-mensagem-erro">Esse campo não pode ficar vazio</span>
                 </div>
                 <button type="submit" class="botao">

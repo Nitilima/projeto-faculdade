@@ -8,7 +8,17 @@ const listaDespesas = () => {
     })
 }
 
-const criaDespesa = (description, amount) => {
+const listaDespesasMes = (ano, mes) => {
+  return fetch(`http://localhost:3000/expense?date_gte=${ano}-${mes}-01&date_lte=${ano}-${mes}-31`)
+    .then(resposta => {
+      if (resposta.ok) {
+        return resposta.json()
+      }
+      throw new Error('não foi possivel listar as despesas por mês')
+    })
+}
+
+const criaDespesa = (description, amount, date) => {
   return fetch(`http://localhost:3000/expense`, {
     method: 'POST',
     headers: {
@@ -16,7 +26,8 @@ const criaDespesa = (description, amount) => {
     },
     body: JSON.stringify({
       description: description,
-      amount: amount
+      amount: amount,
+      date: date
     })
   })
     .then(resposta => {
@@ -47,7 +58,7 @@ const detalhaDespesa = (id) => {
     })
 }
 
-const atualiaDespesa = (id, description, amount) => {
+const atualiaDespesa = (id, description, amount, date) => {
   return fetch(`http://localhost:3000/expense/${id}`, {
     method: 'PUT',
     headers: {
@@ -55,7 +66,8 @@ const atualiaDespesa = (id, description, amount) => {
     },
     body: JSON.stringify({
       description: description,
-      amount: amount
+      amount: amount,
+      date: date
     })
   })
     .then(resposta => {
@@ -71,5 +83,6 @@ export const expenseService = {
   criaDespesa,
   removeDespesa,
   detalhaDespesa,
-  atualiaDespesa
+  atualiaDespesa,
+  listaDespesasMes
 }
