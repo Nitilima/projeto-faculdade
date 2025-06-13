@@ -1,4 +1,4 @@
-Inicio....
+# Como dar inicio
 
 Rode o comando:
 npm install -g json-server (caso de erro coloque o sudo na frente se estiver usando linux)
