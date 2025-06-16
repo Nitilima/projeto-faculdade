@@ -43,7 +43,7 @@ const removeDespesa = (id) => {
     method: 'DELETE'
   }).then(resposta => {
     if (!resposta.ok) {
-      throw new Error('Não foi possivel remover um cliente')
+      throw new Error('Não foi possivel remover uma despesa')
     }
   })
 }
