@@ -10,4 +10,4 @@ Rodar:
 browser-sync start --server --files . --startPath telas/lista_despesa.html
 
 <!-- node server.js -->
-node expense-servie.js
+node expense-service.js
