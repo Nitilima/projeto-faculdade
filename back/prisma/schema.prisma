@@ -1,10 +1,6 @@
-// Prisma Schema for FastAPI Cost Project
-// File: prisma/schema.prisma
-
 generator client {
-    provider                    = "prisma-client-py"
-    recursive_type_depth        = -1
-    enable_experimental_decimal = true
+    provider             = "prisma-client-py"
+    recursive_type_depth = 5
 }
 
 datasource db {
@@ -25,7 +21,6 @@ model User {
     expenses   Expense[]
     categories Category[]
     budgets    Budget[]
-    tags       Tag[]
     reports    Report[]
     settings   UserSettings?
 
@@ -36,7 +31,6 @@ model Category {
     id          String   @id @default(cuid())
     name        String
     description String?
-    color       String   @default("#3B82F6")
     isActive    Boolean  @default(true) @map("is_active")
     createdAt   DateTime @default(now()) @map("created_at")
     updatedAt   DateTime @updatedAt @map("updated_at")
@@ -48,13 +42,13 @@ model Category {
     budgets  Budget[]
 
     @@unique([userId, name], name: "unique_user_category")
-    @@index([userId, name], name: "idx_user_category_name") // NOME ALTERADO
+    @@index([userId, name], name: "idx_user_category_name")
     @@map("categories")
 }
 
 model Expense {
     id          String   @id @default(cuid())
-    amount      Decimal  @db.Decimal(10, 2)
+    amount      Float
     description String?
     date        DateTime
     month       String
@@ -67,41 +61,26 @@ model Expense {
 
     user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     category Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
-    tags     Tag[]
 
     @@index([userId, month], name: "idx_user_month")
-    @@index([userId, categoryId], name: "idx_expense_user_category") // NOME ALTERADO
+    @@index([userId, categoryId], name: "idx_expense_user_category")
     @@index([date], name: "idx_expense_date")
     @@index([userId, year, month], name: "idx_user_year_month")
     @@map("expenses")
 }
 
-model Tag {
-    id        String   @id @default(cuid())
-    name      String
-    color     String   @default("#6B7280")
-    createdAt DateTime @default(now()) @map("created_at")
-
-    userId String @map("user_id")
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-    expenses Expense[]
-
-    @@unique([userId, name], name: "unique_user_tag")
-    @@map("tags")
-}
-
 model Budget {
     id         String   @id @default(cuid())
     name       String
-    amount     Decimal  @db.Decimal(10, 2)
+    amount     Float
     period     String
     startDate  DateTime @map("start_date")
     endDate    DateTime @map("end_date")
     isActive   Boolean  @default(true) @map("is_active")
-    alertLimit Decimal? @map("alert_limit") @db.Decimal(5, 2)
-    createdAt  DateTime @default(now()) @map("created_at")
-    updatedAt  DateTime @updatedAt @map("updated_at")
+    alertLimit Float?   @map("alert_limit")
+
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
 
     userId     String  @map("user_id")
     categoryId String? @map("category_id")
