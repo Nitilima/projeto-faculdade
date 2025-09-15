@@ -1,7 +1,6 @@
 from fastapi import FastAPI
+from app.routers import users
 
-app = FastAPI()
+app = FastAPI(title="Cost Management API")
 
-@app.get("/")
-def main():
-    return {"message": "API rodando"}
+app.include_router(users.router)
