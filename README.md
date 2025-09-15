@@ -21,3 +21,7 @@
 # Docker
 
 docker-compose up -d
+
+# biblioteca para usar
+- https://recharts.org/en-US
+- Lucide
