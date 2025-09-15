@@ -1,11 +1,11 @@
 import "./App.css";
-import CostProjectApp from "./components/CostProjectApp";
+import MainApp from "./app/main";
 
 function App() {
   return (
-    <>
-      <CostProjectApp />
-    </>
+    <div className="App">
+      <MainApp />
+    </div>
   );
 }
 
