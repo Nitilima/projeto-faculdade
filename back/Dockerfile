@@ -1,24 +1,30 @@
-# Base: Python 3.11 slim
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Define o diretório de trabalho
+RUN apt-get update && apt-get install -y \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Copia o requirements primeiro (para cache de build)
+# Copia primeiro o requirements e schema
 COPY requirements.txt .
+COPY prisma/schema.prisma ./prisma/
 
-# Atualiza pip e instala dependências
-RUN python -m pip install --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+# Instala dependências
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir "prisma==0.11.0"
 
-# Copia todo o código
-COPY . .
-
-# Gerar Prisma Client durante a build
+# Gera o client ANTES de copiar todo o código
 RUN prisma generate
 
-# Expõe a porta que o uvicorn vai usar
+# Agora copia todo o resto do código
+COPY . .
+
+# Instala outras dependências do requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
 EXPOSE 8000
 
-# Comando para rodar a aplicação
 CMD ["uvicorn", "run:app", "--host", "0.0.0.0", "--port", "8000"]
