@@ -15,9 +15,9 @@ async def get_expenses():
     return expenses
 
 
-@router.post("/")
-async def create_expense(expense: dict):
-    await db.connect()
-    new_expense = await db.expense.create(data=expense)
-    await db.disconnect()
-    return new_expense
+# @router.post("/")
+# async def create_expense(expense: dict):
+#     await db.connect()
+#     new_expense = await db.expense.create(data=expense)
+#     await db.disconnect()
+#     return new_expense
