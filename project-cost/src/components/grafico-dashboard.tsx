@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -8,16 +9,21 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { month: "Jan", gastos: 5000 },
-  { month: "Feb", gastos: 7000 },
-  { month: "Mar", gastos: 6500 },
-  { month: "Apr", gastos: 8000 },
-  { month: "May", gastos: 7200 },
-  { month: "Jun", gastos: 9000 },
-];
+interface MonthlyExpense {
+  month: string;
+  gastos: number;
+}
 
 export default function EvolucaoGastos() {
+  const [data, setData] = useState<MonthlyExpense[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/expenses/monthly")
+      .then((res) => res.json())
+      .then((json) => setData(json))
+      .catch((err) => console.error("Erro ao buscar dados:", err));
+  }, []);
+
   return (
     <div className="p-6 rounded-lg bg-[#f6f6f6] mt-4">
       <ResponsiveContainer width="100%" height={300}>

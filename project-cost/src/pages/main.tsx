@@ -9,9 +9,9 @@ import {
   CircleUserRound,
   Bell,
 } from "lucide-react";
-import Analises from "./analises";
+// import Analises from "./analises";
 // import Dashboard from "./dashboard";
-// import Despesas from "./despesas";
+import Despesas from "./despesas";
 
 export default function MainApp() {
   const [isOpen, setIsOpen] = useState(true);
@@ -88,7 +88,7 @@ export default function MainApp() {
           <CircleUserRound className="w-6 h-6 text-white" />
         </div>
         <main className="flex-1 p-6">
-          <Analises />
+          <Despesas />
         </main>
       </div>
     </div>

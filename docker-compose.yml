@@ -23,7 +23,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Interface web para gerenciar PostgreSQL (opcional)
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: pgadmin_dev
@@ -41,6 +40,20 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+
+  api:
+    build:
+      context: ./back
+    container_name: fastapi_dev
+    restart: unless-stopped
+    env_file:
+      - ./back/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - app_network
 
 volumes:
   postgres_data:
