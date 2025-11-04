@@ -1,23 +1,17 @@
 import { useState, useEffect } from "react";
-
-interface Categoria {
-  id: number;
-  name: string;
-}
-
-interface Despesa {
-  id: number;
-  description: string;
-  value: number;
-  date: string;
-  category: Categoria;
-}
+import {
+  getCategorias,
+  getDespesas,
+  createDespesa,
+  type Categoria,
+  type Despesa,
+} from "../services/api";
 
 export default function Despesas() {
   // estados do formulário
   const [categoria, setCategoria] = useState("");
   const [valor, setValor] = useState<number | "">("");
-  const [mes, setMes] = useState("");
+  const [data, setData] = useState("");
   const [descricao, setDescricao] = useState("");
 
   // estados da lista e categorias
@@ -26,48 +20,48 @@ export default function Despesas() {
 
   // buscar categorias do backend
   useEffect(() => {
-    fetch("http://localhost:8000/categories")
-      .then((res) => res.json())
+    getCategorias()
       .then((data) => setCategorias(data))
       .catch((err) => console.error(err));
   }, []);
 
   // buscar despesas do backend
   useEffect(() => {
-    fetch("http://localhost:8000/expenses/")
-      .then((res) => res.json())
+    getDespesas()
       .then((data) => setDespesas(data))
       .catch((err) => console.error(err));
   }, []);
 
   const adicionarDespesa = async () => {
-    if (!categoria || !valor || !mes || !descricao) return;
+    if (!categoria || !valor || !data || !descricao) {
+      alert("Por favor, preencha todos os campos!");
+      return;
+    }
 
-    const data = {
+    const despesaData = {
       category_id: parseInt(categoria),
-      value: valor,
-      date: new Date(`${mes}-01`),
+      amount: Number(valor),
+      date: data, // já está no formato YYYY-MM-DD
       description: descricao,
     };
 
-    try {
-      const res = await fetch("http://localhost:8000/expenses/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error("Erro ao cadastrar despesa");
+    console.log("Enviando dados:", despesaData);
 
-      const novaDespesa = await res.json();
+    try {
+      const novaDespesa = await createDespesa(despesaData);
+      console.log("Despesa criada:", novaDespesa);
       setDespesas([...despesas, novaDespesa]);
 
       // limpar campos
       setCategoria("");
       setValor("");
-      setMes("");
+      setData("");
       setDescricao("");
+
+      alert("Despesa adicionada com sucesso!");
     } catch (err) {
-      console.error(err);
+      console.error("Erro completo:", err);
+      alert("Erro ao adicionar despesa. Verifique o console.");
     }
   };
 
@@ -103,9 +97,9 @@ export default function Despesas() {
           />
 
           <input
-            type="month"
-            value={mes}
-            onChange={(e) => setMes(e.target.value)}
+            type="date"
+            value={data}
+            onChange={(e) => setData(e.target.value)}
             className="w-[calc(50%-8px)] p-2 border rounded-lg placeholder-black font-bold bg-[#f6f6f6]"
           />
 
@@ -135,7 +129,7 @@ export default function Despesas() {
         <div className="grid grid-cols-5 gap-4 font-semibold text-gray-700 border-b pb-2">
           <div>Categoria</div>
           <div>Valor</div>
-          <div>Mês</div>
+          <div>Data</div>
           <div>Descrição</div>
           <div>Ações</div>
         </div>
@@ -144,7 +138,7 @@ export default function Despesas() {
           {despesas.map((d) => (
             <div key={d.id} className="grid grid-cols-5 gap-4 py-2 border-b">
               <div>{d.category.name}</div>
-              <div>{d.value}</div>
+              <div>R$ {d.amount.toFixed(2)}</div>
               <div>
                 {new Date(d.date).toLocaleDateString("pt-BR", {
                   month: "short",

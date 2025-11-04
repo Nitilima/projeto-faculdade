@@ -8,18 +8,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-interface MonthlyExpense {
-  month: string;
-  gastos: number;
-}
+import { getMonthlyExpenses, type MonthlyExpense } from "../services/api";
 
 export default function GraficoAnalises() {
   const [data, setData] = useState<MonthlyExpense[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/expenses/monthly")
-      .then((res) => res.json())
+    getMonthlyExpenses()
       .then((json) => setData(json))
       .catch((err) => console.error("Erro ao buscar dados:", err));
   }, []);

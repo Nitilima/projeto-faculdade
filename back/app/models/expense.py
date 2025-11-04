@@ -11,9 +11,12 @@ class Category(Base):
 
 class Expense(Base):
     __tablename__ = "expenses"
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(String, primary_key=True, index=True)
     description = Column(String)
-    value = Column(Float)
+    amount = Column(Float)
     date = Column(Date)
+    month = Column(String)
+    year = Column(Integer)
     category_id = Column(Integer, ForeignKey("categories.id"))
+    user_id = Column(String)
     category = relationship("Category")

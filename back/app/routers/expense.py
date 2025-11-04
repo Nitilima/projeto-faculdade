@@ -69,7 +69,7 @@ def monthly_expenses(db: Session = Depends(get_db)):
     from sqlalchemy import func
     results = (
         db.query(func.to_char(Expense.date, "Mon").label(
-            "month"), func.sum(Expense.value).label("gastos"))
+            "month"), func.sum(Expense.amount).label("gastos"))
         .group_by("month")
         .order_by("month")
         .all()
