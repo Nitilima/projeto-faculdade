@@ -1,6 +1,5 @@
 import { DollarSign, ChartLine, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
-import EvolucaoGastos from "../components/grafico-dashboard";
 import { getDashboardStats } from "../services/api";
 
 export default function Dashboard() {
@@ -34,7 +33,8 @@ export default function Dashboard() {
             <div className="flex flex-col">
               <p className="text-gray-600 font-semibold">Total de Gastos</p>
               <p className="text-[#357ade] font-bold text-xl">
-                R$ {stats.totalGastos.toLocaleString("pt-BR", {
+                R${" "}
+                {stats.totalGastos.toLocaleString("pt-BR", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -70,18 +70,6 @@ export default function Dashboard() {
               <Calendar className="w-6 h-6" />
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Novo título */}
-      <div className="flex-1 flex flex-col bg-[#f6f6f6] shadow-lg p-6 rounded-3xl mt-8">
-        <h2 className="font-semibold text-2xl text-gray-800">
-          Evolução de Gastos por Mês
-        </h2>
-
-        {/* Container do gráfico */}
-        <div className="p-6 rounded-lg mt-4">
-          <EvolucaoGastos />
         </div>
       </div>
     </div>
