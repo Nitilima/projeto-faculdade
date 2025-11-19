@@ -7,6 +7,8 @@ class Category(Base):
     __tablename__ = "categories"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
+    carbon_footprint = Column(Float, default=0.0)
+    sustainability_level = Column(String, default="medium")
 
 
 class Expense(Base):

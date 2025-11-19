@@ -4,6 +4,8 @@ const API_BASE_URL = "http://localhost:8000";
 export interface Categoria {
   id: number;
   name: string;
+  carbon_footprint: number;
+  sustainability_level: string;
 }
 
 export interface Despesa {
@@ -27,6 +29,34 @@ export interface DespesaCreate {
 export interface MonthlyExpense {
   month: string;
   gastos: number;
+}
+
+export interface CategoryAnalysis {
+  category_id: number;
+  category_name: string;
+  total_amount: number;
+  percentage: number;
+  carbon_emissions: number;
+  sustainability_level: string;
+  expense_count: number;
+}
+
+export interface Recommendation {
+  title: string;
+  description: string;
+  investment: number;
+  monthly_savings: number;
+  monthly_co2_reduction: number;
+  payback_months: number;
+  priority: string;
+}
+
+export interface SustainabilityReport {
+  category_id: number;
+  category_name: string;
+  current_spending: number;
+  current_co2: number;
+  suggestion: string;
 }
 
 // Funções de API
@@ -99,4 +129,21 @@ export const getDashboardStats = async () => {
     totalCategorias: categorias.length,
     mesesRegistrados: mesesUnicos.size,
   };
+};
+
+// Análise de Sustentabilidade
+export const getCategoryAnalysis = async (): Promise<CategoryAnalysis[]> => {
+  const response = await fetch(`${API_BASE_URL}/expenses/analysis/by-category`);
+  if (!response.ok) throw new Error("Erro ao buscar análise de categorias");
+  return response.json();
+};
+
+export const getRecommendations = async (
+  categoryId: number
+): Promise<SustainabilityReport> => {
+  const response = await fetch(
+    `${API_BASE_URL}/expenses/recommendations/${categoryId}`
+  );
+  if (!response.ok) throw new Error("Erro ao buscar recomendações");
+  return response.json();
 };

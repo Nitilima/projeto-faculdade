@@ -1,16 +1,8 @@
-# 💰 Project Cost - Sistema de Controle de Gastos
+# Project Cost - Sistema de Gestão Sustentável Portuária
 
-Sistema web para gerenciamento e análise de despesas pessoais, desenvolvido como projeto acadêmico.
+Sistema web para gerenciamento de despesas e análise de sustentabilidade em operações portuárias
 
-## 📋 Sobre o Projeto
-
-Sistema completo de controle financeiro que permite:
-- ✅ Cadastro e gerenciamento de despesas
-- 📊 Visualização de gastos por categoria
-- 📈 Análise de tendências e evolução de gastos
-- 🎯 Dashboard com métricas em tempo real
-
-## 🏗️ Arquitetura
+## Arquitetura
 
 ### Backend
 - **Framework**: FastAPI (Python 3.11)
@@ -28,15 +20,15 @@ Sistema completo de controle financeiro que permite:
 ### DevOps
 - **Containerização**: Docker + Docker Compose
 - **CI/CD**: GitHub Actions
-- **Gerenciamento BD**: pgAdmin 4
+- **Gerenciamento DB**: pgAdmin 4
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 - Docker e Docker Compose instalados
 - Git
 
-### Opção 1: Usando Docker (Recomendado)
+### Opção 1: Usando Docker
 
 ```bash
 # Clone o repositório
@@ -102,42 +94,6 @@ npm install
 npm run dev
 ```
 
-## 📁 Estrutura do Projeto
-
-```
-project/
-├── back/                          # Backend FastAPI
-│   ├── app/
-│   │   ├── models/               # Modelos do banco de dados
-│   │   ├── routers/              # Endpoints da API
-│   │   ├── schemas/              # Schemas Pydantic
-│   │   └── database.py           # Configuração do banco
-│   ├── Dockerfile                # Dockerfile de produção
-│   ├── Dockerfile.dev            # Dockerfile de desenvolvimento
-│   ├── requirements.txt          # Dependências Python
-│   └── run.py                    # Ponto de entrada da aplicação
-│
-├── project-cost/                  # Frontend React
-│   ├── src/
-│   │   ├── components/           # Componentes React
-│   │   ├── pages/                # Páginas da aplicação
-│   │   ├── services/             # Serviços e chamadas API
-│   │   └── App.tsx               # Componente principal
-│   ├── Dockerfile                # Dockerfile de produção (Nginx)
-│   ├── nginx.conf                # Configuração Nginx
-│   └── package.json              # Dependências Node.js
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml                # Pipeline CI/CD
-│
-├── docker-compose.yml            # Compose para desenvolvimento
-├── docker-compose.prod.yml       # Compose para produção
-└── README.md                     # Este arquivo
-```
-
-## 🔌 API Endpoints
-
 ### Despesas
 - `GET /expenses/` - Lista todas as despesas
 - `POST /expenses/create-expense` - Cria nova despesa
@@ -148,65 +104,6 @@ project/
 - `POST /expenses/create-category` - Cria nova categoria
 
 **Documentação completa:** http://localhost:8000/docs
-
-## 🛠️ Scripts Úteis
-
-### Docker
-```bash
-# Parar todos os serviços
-docker-compose down
-
-# Parar e remover volumes (limpa banco de dados)
-docker-compose down -v
-
-# Ver logs em tempo real
-docker-compose logs -f
-
-# Ver logs de um serviço específico
-docker-compose logs -f api
-docker-compose logs -f frontend
-
-# Reconstruir serviços
-docker-compose up --build
-
-# Executar comando em um container
-docker-compose exec api bash
-docker-compose exec postgres psql -U dev -d cost
-```
-
-### Produção
-```bash
-# Build e execução em modo produção
-docker-compose -f docker-compose.prod.yml up --build -d
-
-# Verificar status
-docker-compose -f docker-compose.prod.yml ps
-
-# Parar produção
-docker-compose -f docker-compose.prod.yml down
-```
-
-## 🧪 Testes e CI/CD
-
-O projeto utiliza GitHub Actions para CI/CD:
-
-- **Backend**: Linting com flake8 e testes com pytest
-- **Frontend**: Linting com ESLint e build
-- **Docker**: Build das imagens em produção
-
-Para executar localmente:
-
-```bash
-# Backend
-cd back
-flake8 .
-pytest --cov=app
-
-# Frontend
-cd project-cost
-npm run lint
-npm run build
-```
 
 ## 📚 Bibliotecas Principais
 
@@ -225,26 +122,6 @@ npm run build
 - TailwindCSS - Framework CSS
 - Recharts - Biblioteca de gráficos
 - Lucide React - Ícones
-
-## 🤝 Contribuindo
-
-Este é um projeto acadêmico. Para contribuir:
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📝 Licença
-
-Projeto desenvolvido para fins acadêmicos.
-
-## 👥 Autores
-
-Desenvolvido como projeto de faculdade.
-
----
 
 **Documentação adicional:**
 - [Recharts Documentation](https://recharts.org/en-US)
